@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import logo from "../../../public/logo/Faculty Horizontal_Science and Technology.png";
+import logo from "../../../public/logo/Faculty Horizontal_Science and Technology.png 04-16-43-306.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

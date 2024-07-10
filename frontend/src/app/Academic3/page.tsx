@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import AcademicHeader from "./AcademicHeader";
+import InputForm from "./Components/FormInput";
 
 const page = () => {
   return (
-    <div>Academic3</div>
-  )
-}
+    <>
+      <AcademicHeader />
+      <InputForm />
+    </>
+  );
+};
 
-export default page
+export default page;

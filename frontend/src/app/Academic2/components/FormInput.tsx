@@ -50,11 +50,11 @@ const FormInput: React.FC = () => {
           formData.courseName as keyof typeof courseNameMapping
         ] || formData.courseName,
       courseGroup:
-        formData.courseCategory === 'option1'
+        formData.courseCategory === "option1"
           ? courseGroupMapping[
               formData.courseGroup as keyof typeof courseGroupMapping
             ] || formData.courseGroup
-          : 'none',
+          : "none",
     };
     setFormDataList((prev) => [...prev, convertedFormData]);
     setFormData(initialFormData);
@@ -85,12 +85,15 @@ const FormInput: React.FC = () => {
         ...prevFormData,
         [id]: value,
       };
-  
+
       // If courseCategory changes to option2 or option3, set courseGroup to empty string
-      if (id === 'courseCategory' && (value === 'option2' || value === 'option3')) {
-        updatedFormData.courseGroup = 'none';
+      if (
+        id === "courseCategory" &&
+        (value === "option2" || value === "option3")
+      ) {
+        updatedFormData.courseGroup = "none";
       }
-  
+
       return updatedFormData;
     });
   };

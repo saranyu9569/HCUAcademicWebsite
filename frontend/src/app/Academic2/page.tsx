@@ -4,10 +4,10 @@ import FormInput from './components/FormInput'
 
 const page = () => {
   return (
-    <div>
+    <>
       <AcademicHeader/>
       <FormInput />
-    </div>
+    </>
   )
 }
 
