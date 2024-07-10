@@ -23,7 +23,7 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-1 pr-10">
+          <div className="hidden lg:flex items-center space-x-1 pr-10">
             <Link
               href="/Academic2"
               className="py-4 px-2 text-white font-semibold hover:text-orangered transition duration-300"
@@ -56,7 +56,7 @@ const Navbar = () => {
             </Link>
           </div>
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               className="outline-none mobile-menu-button"
               onClick={() => setIsOpen(!isOpen)}
@@ -77,7 +77,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* Mobile menu */}
-      <div className={`md:hidden ${isOpen ? "block" : "hidden"}`}>
+      <div className={`lg:hidden ${isOpen ? "block" : "hidden"}`}>
         <ul className="">
           <li>
             <Link

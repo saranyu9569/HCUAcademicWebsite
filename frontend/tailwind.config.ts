@@ -21,6 +21,9 @@ const config: Config = {
         'dark-blue-main': '#0A022C',
         'light-blue-main': '#16055D',
       },
+      spacing: {
+        '17': '70px',
+      }
     },
   },
   plugins: [],

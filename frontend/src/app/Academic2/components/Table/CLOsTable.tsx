@@ -1,18 +1,18 @@
+// CLOsTable.tsx
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faSave, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FormData, FormDataKey, categoryMapping, courseNameMapping, courseGroupMapping } from '../Data/types';
+import { CLO } from '../Data/types';
 
-interface DataTableProps {
-  data: FormData[];
-  onSave: (editedData: FormData, index: number) => void;
+interface CLOsTableProps {
+  data: CLO[];
+  onSave: (editedData: CLO, index: number) => void;
   onDelete: (index: number) => void;
-  title: string;
 }
 
-const DataTable: React.FC<DataTableProps> = ({ data, onSave, onDelete, title }) => {
+const CLOsTable: React.FC<CLOsTableProps> = ({ data, onSave, onDelete }) => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [editedData, setEditedData] = useState<FormData | null>(null);
+  const [editedData, setEditedData] = useState<CLO | null>(null);
 
   const handleEdit = (index: number) => {
     setEditingIndex(index);
@@ -32,58 +32,43 @@ const DataTable: React.FC<DataTableProps> = ({ data, onSave, onDelete, title }) 
     setEditedData(null);
   };
 
-  const handleInputChange = (key: FormDataKey, value: string) => {
+  const handleInputChange = (key: keyof CLO, value: string) => {
     if (editedData) {
-      let newValue = value;
-      if (key === 'courseCategory') {
-        newValue = Object.entries(categoryMapping).find(([k, v]) => v === value)?.[0] || value;
-      } else if (key === 'courseName') {
-        newValue = Object.entries(courseNameMapping).find(([k, v]) => v === value)?.[0] || value;
-      } else if (key === 'courseGroup') {
-        newValue = Object.entries(courseGroupMapping).find(([k, v]) => v === value)?.[0] || value;
-      }
-      setEditedData(prev => ({ ...prev!, [key]: newValue }));
+      setEditedData(prev => ({ ...prev!, [key]: value }));
     }
   };
 
   if (data.length === 0) {
-    return <div className="mt-10">ยังไม่มีข้อมูลใน {title}</div>;
+    return <div className="mt-10">No CLOs available</div>;
   }
 
   return (
     <div className="mt-10 overflow-x-auto">
-      <h2 className="text-2xl mb-4">{title}</h2>
+      <h2 className="text-2xl mb-4">CLOs Table</h2>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-700">
-            {(Object.keys(data[0]) as FormDataKey[]).map((key) => (
-              <th key={key} className="border border-gray-300 p-2 whitespace-nowrap">
-                {key}
-              </th>
-            ))}
+            <th className="border border-gray-300 p-2 whitespace-nowrap">Course ID</th>
+            <th className="border border-gray-300 p-2 whitespace-nowrap">CLO</th>
             <th className="border border-gray-300 p-2 whitespace-nowrap">Actions</th>
           </tr>
         </thead>
         <tbody>
           {data.map((row, rowIndex) => (
             <tr key={rowIndex} className="bg-gray-800">
-              {(Object.keys(row) as FormDataKey[]).map((key) => (
-                <td key={key} className="border border-gray-300 p-2">
-                  {editingIndex === rowIndex ? (
-                    <input
-                      type="text"
-                      value={editedData![key]}
-                      onChange={(e) => handleInputChange(key, e.target.value)}
-                      className="w-full bg-gray-700 text-white p-1"
-                    />
-                  ) : (
-                    key === 'courseCategory' ? categoryMapping[row[key] as keyof typeof categoryMapping] || row[key] :
-                    key === 'courseName' ? courseNameMapping[row[key] as keyof typeof courseNameMapping] || row[key] :
-                    key === 'courseGroup' ? courseGroupMapping[row[key] as keyof typeof courseGroupMapping] || row[key] :
-                    row[key]
-                  )}
-                </td>
-              ))}
+              <td className="border border-gray-300 p-2">{row.courseID}</td>
+              <td className="border border-gray-300 p-2">
+                {editingIndex === rowIndex ? (
+                  <input
+                    type="text"
+                    value={editedData!.clo}
+                    onChange={(e) => handleInputChange('clo', e.target.value)}
+                    className="w-full bg-gray-700 text-white p-1"
+                  />
+                ) : (
+                  row.clo
+                )}
+              </td>
               <td className="border border-gray-300 p-2">
                 <div className="flex justify-center space-x-2">
                   {editingIndex === rowIndex ? (
@@ -115,4 +100,4 @@ const DataTable: React.FC<DataTableProps> = ({ data, onSave, onDelete, title }) 
   );
 };
 
-export default DataTable;
+export default CLOsTable;
