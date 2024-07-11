@@ -46,18 +46,20 @@ const DataTable: React.FC<DataTableProps> = ({ data, onSave, onDelete, title }) 
     }
   };
 
+  const isDescriptionColumn = (key: string) => ['DescriptionThai', 'DescriptionEng'].includes(key);
+
   if (data.length === 0) {
     return <div className="mt-10">ยังไม่มีข้อมูลใน {title}</div>;
   }
 
   return (
-    <div className="mt-10 overflow-x-auto">
+    <div className="mt-10 overflow-x-auto max-w-full">
       <h2 className="text-2xl mb-4">{title}</h2>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-700">
             {(Object.keys(data[0]) as FormDataKey[]).map((key) => (
-              <th key={key} className="border border-gray-300 p-2 whitespace-nowrap">
+              <th key={key} className={`border border-gray-300 p-2 ${isDescriptionColumn(key) ? 'w-1/4' : 'whitespace-nowrap'}`}>
                 {key}
               </th>
             ))}
@@ -68,7 +70,7 @@ const DataTable: React.FC<DataTableProps> = ({ data, onSave, onDelete, title }) 
           {data.map((row, rowIndex) => (
             <tr key={rowIndex} className="bg-gray-800">
               {(Object.keys(row) as FormDataKey[]).map((key) => (
-                <td key={key} className="border border-gray-300 p-2">
+                <td key={key} className={`border border-gray-300 p-2 ${isDescriptionColumn(key) ? 'max-w-[300px] min-w-[200px]' : ''}`}>
                   {editingIndex === rowIndex ? (
                     <input
                       type="text"
@@ -77,10 +79,12 @@ const DataTable: React.FC<DataTableProps> = ({ data, onSave, onDelete, title }) 
                       className="w-full bg-gray-700 text-white p-1"
                     />
                   ) : (
-                    key === 'courseCategory' ? categoryMapping[row[key] as keyof typeof categoryMapping] || row[key] :
-                    key === 'courseName' ? courseNameMapping[row[key] as keyof typeof courseNameMapping] || row[key] :
-                    key === 'courseGroup' ? courseGroupMapping[row[key] as keyof typeof courseGroupMapping] || row[key] :
-                    row[key]
+                    <div className={isDescriptionColumn(key) ? 'truncate' : ''} title={isDescriptionColumn(key) ? row[key] : undefined}>
+                      {key === 'courseCategory' ? categoryMapping[row[key] as keyof typeof categoryMapping] || row[key] :
+                      key === 'courseName' ? courseNameMapping[row[key] as keyof typeof courseNameMapping] || row[key] :
+                      key === 'courseGroup' ? courseGroupMapping[row[key] as keyof typeof courseGroupMapping] || row[key] :
+                      row[key]}
+                    </div>
                   )}
                 </td>
               ))}
