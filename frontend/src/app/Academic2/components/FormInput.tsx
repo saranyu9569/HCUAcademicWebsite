@@ -86,7 +86,6 @@ const FormInput: React.FC = () => {
         [id]: value,
       };
 
-      // If courseCategory changes to option2 or option3, set courseGroup to empty string
       if (
         id === "courseCategory" &&
         (value === "option2" || value === "option3")

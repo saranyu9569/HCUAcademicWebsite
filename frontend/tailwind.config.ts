@@ -23,6 +23,7 @@ const config: Config = {
       },
       spacing: {
         '17': '70px',
+        '34': '135px'
       }
     },
   },
