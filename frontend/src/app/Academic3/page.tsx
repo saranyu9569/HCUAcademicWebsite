@@ -1,5 +1,5 @@
 import React from "react";
-import AcademicHeader from "./AcademicHeader";
+import AcademicHeader from "./Components/AcademicHeader";
 import InputForm from "./Components/FormInput";
 
 const page = () => {
