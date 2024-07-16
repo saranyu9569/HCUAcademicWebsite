@@ -1,22 +1,41 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
-import Step1 from './Components/Step/Step1/Section1';
-import { CourseProvider } from './Data/CourseContext';
-import Step2 from './Components/Step/Step2/Step2';
+import React, { useState } from "react";
+import Step1 from "./Components/Step/Step1/Section1";
+import { CourseProvider } from "./Data/CourseContext";
+import Step2 from "./Components/Step/Step2/Step2";
+import Step5 from "./Components/Step/Step5/Step5";
+import ResourcesComponent from "./Components/Step/Step5/Section/Resource";
 
 const MultiStepForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const nextStep = () => setCurrentStep(prev => prev + 1);
-  const prevStep = () => setCurrentStep(prev => prev - 1);
+  const nextStep = () => setCurrentStep((prev) => prev + 1);
+  const prevStep = () => setCurrentStep((prev) => prev - 1);
 
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return <CourseProvider> <Step1 /> </CourseProvider>;
+        return (
+          <CourseProvider>
+            {" "}
+            <Step1 />{" "}
+          </CourseProvider>
+        );
       case 2:
-        return <CourseProvider> <Step2 /> </CourseProvider>;
+        return (
+          <CourseProvider>
+            {" "}
+            <Step2 />{" "}
+          </CourseProvider>
+        );
+      case 3:
+        return (
+          <CourseProvider>
+            {" "}
+            <Step5 />{" "}
+          </CourseProvider>
+        );
       default:
         return null;
     }
@@ -31,8 +50,11 @@ const MultiStepForm: React.FC = () => {
             Previous
           </button>
         )}
-        {currentStep < 3 && ( 
-          <button onClick={nextStep} className="bg-orangered hover:bg-red-600 text-white px-4 py-2 rounded">
+        {currentStep < 3 && (
+          <button
+            onClick={nextStep}
+            className="bg-orangered hover:bg-red-600 text-white px-4 py-2 rounded"
+          >
             Next
           </button>
         )}

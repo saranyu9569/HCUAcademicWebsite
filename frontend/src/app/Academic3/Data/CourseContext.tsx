@@ -1,15 +1,26 @@
-import React, { createContext, useState, useContext } from 'react';
-import { CourseDetails } from './types';
+// CourseContext.tsx
+
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { CourseDetails } from './types'; // Import CourseDetails from types.ts
 
 interface CourseContextType {
-  courseDetails: CourseDetails | null;
-  setCourseDetails: React.Dispatch<React.SetStateAction<CourseDetails | null>>;
+  courseDetails: CourseDetails;
+  setCourseDetails: React.Dispatch<React.SetStateAction<CourseDetails>>;
 }
 
 const CourseContext = createContext<CourseContextType | undefined>(undefined);
 
-export const CourseProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [courseDetails, setCourseDetails] = useState<CourseDetails | null>(null);
+const initialCourseDetails: CourseDetails = {
+  ploCloMappings: {},
+  resources: {
+    mainTextbooks: [],
+    additionalResources: [],
+    recommendedResources: [],
+  },
+};
+
+export const CourseProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [courseDetails, setCourseDetails] = useState<CourseDetails>(initialCourseDetails);
 
   return (
     <CourseContext.Provider value={{ courseDetails, setCourseDetails }}>
@@ -18,6 +29,7 @@ export const CourseProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   );
 };
 
+// Create a custom hook to use the context
 export const useCourseContext = () => {
   const context = useContext(CourseContext);
   if (context === undefined) {

@@ -40,4 +40,19 @@ export interface CourseDetails {
 
   //Step2 
   CourseObjective?: string[];
+  ploCloMappings: Record<string, boolean>;
+
+  //Step5
+  resources: CourseResources;
+}
+
+export interface ResourceItem {
+  id: string;
+  text: string;
+}
+
+export interface CourseResources {
+  mainTextbooks: ResourceItem[];
+  additionalResources: ResourceItem[];
+  recommendedResources: ResourceItem[];
 }
