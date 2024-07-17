@@ -42,6 +42,9 @@ export interface CourseDetails {
   CourseObjective?: string[];
   ploCloMappings: Record<string, boolean>;
 
+  //Step3
+  cloDetails: CLODetail[];
+
   //Step5
   resources: CourseResources;
 }
@@ -55,4 +58,23 @@ export interface CourseResources {
   mainTextbooks: ResourceItem[];
   additionalResources: ResourceItem[];
   recommendedResources: ResourceItem[];
+}
+
+export interface CLODetail {
+  id: string;
+  description: string;
+  teachingMethods: string;
+  evaluationMethods: EvaluationMethods;
+}
+
+export interface EvaluationMethods {
+  การส่งงาน: boolean;
+  การอภิปรายและการซักถามและการตอบคำถาม: boolean;
+  การเขียนรายงาน: boolean;
+  การนำเสนอ: boolean;
+  การสอบทฤษฎี: boolean;
+  การสอบปฏิบัติ: boolean;
+  สอบกลางภาค: boolean;
+  สอบปลายภาค: boolean;
+  อื่นๆ: string;
 }

@@ -56,7 +56,7 @@ const Step1 = () => {
   ) => {
     const courseID = event.target.value;
     setSelectedCourseID(courseID);
-
+  
     if (courseID) {
       try {
         const response = await fetch(
@@ -67,14 +67,14 @@ const Step1 = () => {
           setCourseDetails(data);
         } else {
           console.error("Failed to fetch course details");
-          setCourseDetails(null);
+          setCourseDetails({} as CourseDetails);
         }
       } catch (error) {
         console.error("Error fetching course details:", error);
-        setCourseDetails(null);
+        setCourseDetails({} as CourseDetails);
       }
     } else {
-      setCourseDetails(null);
+      setCourseDetails({} as CourseDetails);
     }
   };
 

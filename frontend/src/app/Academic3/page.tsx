@@ -6,6 +6,8 @@ import { CourseProvider } from "./Data/CourseContext";
 import Step2 from "./Components/Step/Step2/Step2";
 import Step5 from "./Components/Step/Step5/Step5";
 import ResourcesComponent from "./Components/Step/Step5/Section/Resource";
+import Step3 from "./Components/Step/Step3/Step3";
+import Step4 from "./Components/Step/Step4/Step4";
 
 const MultiStepForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -33,6 +35,20 @@ const MultiStepForm: React.FC = () => {
         return (
           <CourseProvider>
             {" "}
+            <Step3 />{" "}
+          </CourseProvider>
+        );
+      case 4:
+        return (
+          <CourseProvider>
+            {" "}
+            <Step4 />{" "}
+          </CourseProvider>
+        );
+      case 5:
+        return (
+          <CourseProvider>
+            {" "}
             <Step5 />{" "}
           </CourseProvider>
         );
@@ -50,7 +66,7 @@ const MultiStepForm: React.FC = () => {
             Previous
           </button>
         )}
-        {currentStep < 3 && (
+        {currentStep < 5 && (
           <button
             onClick={nextStep}
             className="bg-orangered hover:bg-red-600 text-white px-4 py-2 rounded"

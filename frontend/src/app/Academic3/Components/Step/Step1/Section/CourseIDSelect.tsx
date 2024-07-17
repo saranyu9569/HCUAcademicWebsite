@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCourseContext } from '../../../../Data/CourseContext';
+import { CourseDetails } from '../../../../Data/types'; // Make sure to import CourseDetails type
 
 interface CourseID {
   CourseID: string;
@@ -21,15 +22,17 @@ const CourseIDSelect: React.FC<CourseIDSelectProps> = ({ courseIDs, selectedCour
     if (courseID) {
       fetch(`/api/getCourseDetails?courseID=${courseID}`)
         .then(response => response.json())
-        .then(data => {
+        .then((data: CourseDetails) => {
           setCourseDetails(data);
         })
         .catch(error => {
           console.error("Error fetching course details:", error);
-          setCourseDetails(null);
+          // Set to an empty CourseDetails object instead of null
+          setCourseDetails({} as CourseDetails);
         });
     } else {
-      setCourseDetails(null);
+      // Set to an empty CourseDetails object instead of null
+      setCourseDetails({} as CourseDetails);
     }
   };
 
