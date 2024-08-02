@@ -1,5 +1,46 @@
+// types.ts
+
 export interface CourseID {
   CourseID: string;
+}
+
+export interface ScheduleItem {
+  date: string;
+  type: 'Lecture' | 'Lab' | 'Midterm Exam' | 'Final Exam';
+  clos: string[];
+  activities: string;
+  instructor: string;
+  topics: { type: string; description: string }[];
+}
+
+export interface ResourceItem {
+  id: string;
+  text: string;
+}
+
+export interface CourseResources {
+  mainTextbooks: ResourceItem[];
+  additionalResources: ResourceItem[];
+  recommendedResources: ResourceItem[];
+}
+
+export interface EvaluationMethods {
+  การส่งงาน: boolean;
+  การอภิปรายและการซักถามและการตอบคำถาม: boolean;
+  การเขียนรายงาน: boolean;
+  การนำเสนอ: boolean;
+  การสอบทฤษฎี: boolean;
+  การสอบปฏิบัติ: boolean;
+  สอบกลางภาค: boolean;
+  สอบปลายภาค: boolean;
+  อื่นๆ: string;
+}
+
+export interface CLODetail {
+  id: string;
+  description: string;
+  teachingMethods: string;
+  evaluationMethods: EvaluationMethods;
 }
 
 export interface CourseDetails {
@@ -38,43 +79,16 @@ export interface CourseDetails {
   ClassRoomLab?: string;
   ConsultTime?: string;
 
-  //Step2 
+  // Step2 
   CourseObjective?: string[];
   ploCloMappings: Record<string, boolean>;
 
-  //Step3
+  // Step3
   cloDetails: CLODetail[];
 
-  //Step5
+  // Step4 
+  schedule: ScheduleItem[];
+
+  // Step5
   resources: CourseResources;
-}
-
-export interface ResourceItem {
-  id: string;
-  text: string;
-}
-
-export interface CourseResources {
-  mainTextbooks: ResourceItem[];
-  additionalResources: ResourceItem[];
-  recommendedResources: ResourceItem[];
-}
-
-export interface CLODetail {
-  id: string;
-  description: string;
-  teachingMethods: string;
-  evaluationMethods: EvaluationMethods;
-}
-
-export interface EvaluationMethods {
-  การส่งงาน: boolean;
-  การอภิปรายและการซักถามและการตอบคำถาม: boolean;
-  การเขียนรายงาน: boolean;
-  การนำเสนอ: boolean;
-  การสอบทฤษฎี: boolean;
-  การสอบปฏิบัติ: boolean;
-  สอบกลางภาค: boolean;
-  สอบปลายภาค: boolean;
-  อื่นๆ: string;
 }

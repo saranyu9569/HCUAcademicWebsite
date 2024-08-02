@@ -5,7 +5,6 @@ import Step1 from "./Components/Step/Step1/Section1";
 import { CourseProvider } from "./Data/CourseContext";
 import Step2 from "./Components/Step/Step2/Step2";
 import Step5 from "./Components/Step/Step5/Step5";
-import ResourcesComponent from "./Components/Step/Step5/Section/Resource";
 import Step3 from "./Components/Step/Step3/Step3";
 import Step4 from "./Components/Step/Step4/Step4";
 

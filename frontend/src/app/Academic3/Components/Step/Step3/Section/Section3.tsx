@@ -59,7 +59,7 @@ const CLOInputTable: React.FC = () => {
           <th className="border border-black p-2">วิธีการวัดประเมินผลการเรียนรู้</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className='bg-gray-50'>
         {courseDetails.CLOs && courseDetails.CLOs.length > 0 ? (
           courseDetails.CLOs.map((clo: string, index: number) => (
             <tr key={index}>

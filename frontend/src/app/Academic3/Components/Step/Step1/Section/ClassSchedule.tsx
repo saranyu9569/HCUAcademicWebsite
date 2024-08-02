@@ -109,13 +109,13 @@ const ScheduleSection: React.FC<ScheduleSectionProps> = ({
           onChange={(e) => onSelectChange(`Date${prefix}`, e.target.value)}
         >
           <option value="">เลือกวัน</option>
+          <option value="Sunday">อาทิตย์</option>
           <option value="Monday">จันทร์</option>
           <option value="Tuesday">อังคาร</option>
           <option value="Wednesday">พุธ</option>
           <option value="Thursday">พฤหัสบดี</option>
           <option value="Friday">ศุกร์</option>
           <option value="Saturday">เสาร์</option>
-          <option value="Sunday">อาทิตย์</option>
         </select>
 
         <label htmlFor="Time" className="pl-5 pr-2">

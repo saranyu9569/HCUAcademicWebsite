@@ -80,43 +80,55 @@ const PLO: React.FC = () => {
     }));
   }
 
-  return (
-    <div className="w-full max-w-screen mx-auto text-black pt-10 overflow-x-auto">
-      <h2 className="text-lg font-bold mb-4">4. ความสอดคล้องของผลลัพธ์การเรียนรู้ที่คาดหวังของหลักสูตร (Program Learning Outcome : PLOs) <br/>&emsp;&nbsp;และผลลัพธ์การเรียนรู้ที่คาดหวังระดับรายวิชา (Course-level Learning Outcomes: CLOs)</h2>
-      <table className="w-full border-collapse border border-gray-800">
-        <thead>
-          <tr className="bg-pink-200">
-            <th className="border border-gray-800 p-2" rowSpan={2}>PLOs/CLOs</th>
-            {Array.from({ length: cloCount }, (_, i) => (
-              <th key={i} className="border border-gray-800 p-2">CLO<br />{i + 1}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {plos.map((plo, ploIndex) => (
-            <React.Fragment key={ploIndex}>
-              <tr className="bg-pink-200">
-                <td className="border border-gray-800 p-2" colSpan={cloCount + 1}>{plo.plo}</td>
-              </tr>
-              {plo.subplos.map((subplo, subploIndex) => (
-                <tr key={`${ploIndex}-${subploIndex}`}>
-                  <td className="border border-gray-800 p-2">{subplo.text}</td>
-                  {Array.from({ length: cloCount }, (_, cloIndex) => (
-                    <td key={cloIndex} className="border border-gray-800 p-2 text-center">
+  const renderTable = (isCheckbox: boolean) => (
+    <table className="w-full border-collapse border border-gray-800">
+      <thead>
+        <tr className="bg-pink-200">
+          <th className="border border-gray-800 p-2" rowSpan={2}>PLOs/CLOs</th>
+          {Array.from({ length: cloCount }, (_, i) => (
+            <th key={i} className="border border-gray-800 p-2">CLO<br />{i + 1}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {plos.map((plo, ploIndex) => (
+          <React.Fragment key={ploIndex}>
+            <tr className="bg-pink-200">
+              <td className="border border-gray-800 p-2" colSpan={cloCount + 1}>{plo.plo}</td>
+            </tr>
+            {plo.subplos.map((subplo, subploIndex) => (
+              <tr key={`${ploIndex}-${subploIndex}`}>
+                <td className="border border-gray-800 p-2">{subplo.text}</td>
+                {Array.from({ length: cloCount }, (_, cloIndex) => (
+                  <td key={cloIndex} className="border border-gray-800 p-2 text-center">
+                    {isCheckbox ? (
                       <input 
                         type="checkbox" 
                         checked={ploCloMappings[`${ploIndex}-${subploIndex}-${cloIndex}`] || false}
                         onChange={() => handleCheckboxChange(ploIndex, subploIndex, cloIndex)}
                         className="form-checkbox h-5 w-5 text-blue-600"
                       />
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </React.Fragment>
-          ))}
-        </tbody>
-      </table>
+                    ) : (
+                      ploCloMappings[`${ploIndex}-${subploIndex}-${cloIndex}`] ? '✓' : ''
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </React.Fragment>
+        ))}
+      </tbody>
+    </table>
+  )
+
+  return (
+    <div className="w-full max-w-screen mx-auto text-black pt-10 overflow-x-auto">
+      <h2 className="text-lg font-bold mb-4">4. ความสอดคล้องของผลลัพธ์การเรียนรู้ที่คาดหวังของหลักสูตร (Program Learning Outcome : PLOs) <br/>&emsp;&nbsp;และผลลัพธ์การเรียนรู้ที่คาดหวังระดับรายวิชา (Course-level Learning Outcomes: CLOs)</h2>
+      
+      {renderTable(true)}
+
+      <h3 className="text-lg font-bold mt-8 mb-4">Selected Mappings:</h3>
+      {renderTable(false)}
     </div>
   )
 }

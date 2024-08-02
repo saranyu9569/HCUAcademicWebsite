@@ -1,0 +1,54 @@
+        <Text style={styles.subtitle}>PLO-CLO Mappings</Text>
+        {renderPLOCLOTable(courseDetails)}
+
+        <Text style={styles.subtitle}>CLO Details</Text>
+        {courseDetails.cloDetails && courseDetails.cloDetails.length > 0 ? (
+          courseDetails.cloDetails.map((cloDetail: CLODetail, index) => (
+            <View key={index} style={styles.list}>
+              <Text style={styles.text}>ID: {cloDetail.id}</Text>
+              <Text style={styles.text}>
+                Description: {cloDetail.description}
+              </Text>
+              <Text style={styles.text}>
+                Teaching Methods: {cloDetail.teachingMethods}
+              </Text>
+              <Text style={styles.text}>Evaluation Methods:</Text>
+              {cloDetail.evaluationMethods &&
+                Object.entries(cloDetail.evaluationMethods).map(
+                  ([method, value]) => (
+                    <Text key={method} style={styles.text}>
+                      • {method}:{" "}
+                      {typeof value === "boolean"
+                        ? value
+                          ? "Yes"
+                          : "No"
+                        : value}
+                    </Text>
+                  )
+                )}
+            </View>
+          ))
+        ) : (
+          <Text style={styles.text}>No CLO details available</Text>
+        )}
+
+        <Text style={styles.subtitle}>Schedule</Text>
+        {courseDetails.schedule && courseDetails.schedule.length > 0 ? (
+          courseDetails.schedule.map((item: ScheduleItem, index) => (
+            <View key={index} style={styles.list}>
+              <Text style={styles.text}>Date: {item.date}</Text>
+              <Text style={styles.text}>Type: {item.type}</Text>
+              <Text style={styles.text}>CLOs: {item.clos.join(", ")}</Text>
+              <Text style={styles.text}>Activities: {item.activities}</Text>
+              <Text style={styles.text}>Instructor: {item.instructor}</Text>
+              <Text style={styles.text}>Topics:</Text>
+              {item.topics.map((topic, topicIndex) => (
+                <Text key={topicIndex} style={styles.text}>
+                  • {topic.type}: {topic.description}
+                </Text>
+              ))}
+            </View>
+          ))
+        ) : (
+          <Text style={styles.text}>No schedule available</Text>
+        )}
